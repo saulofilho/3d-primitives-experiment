@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Link
 } from "react-router-dom";
@@ -7,15 +7,15 @@ import '../App.css';
 import cylinder from '../images/cylinder.jpg';
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuClassNames = isOpen ? 'show' : 'hide';
+
   return (
     <>
       <main>
         <section className="about">
           <div className="container">
             <div className="row">
-              <div className="about-img">
-                <img src={cylinder} alt="" />
-              </div>
               <div className="about-text">
                 <h2>Cylinder</h2>
                 <br/>
@@ -33,17 +33,19 @@ function App() {
           </div>
         </section>
         <section className="canvas-sketch">
-          <div id="inputsVariables" className="container"></div>
-          <div id="btnSave" className="container"></div>
+          <div className={menuClassNames}>
+            <div className="input-btn-wrapper">
+              <div id="inputsVariables" className="container"></div>
+              <div id="btnSave" className="container"></div>
+            </div>
+          </div>
+          <button className="btn-toggle" onClick={() => setIsOpen(!isOpen)}>custom</button>
           <SketchCylinder />
         </section>
       </main>
       <Link to="/">
           <h1>⟵</h1>
       </Link>
-      <footer>
-        <p>satanic & satanist, inc</p>
-      </footer>
     </>
   );
 }
